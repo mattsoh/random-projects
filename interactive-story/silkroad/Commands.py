@@ -8,8 +8,10 @@ def shows():
   print("porcelain bowls left: %s"%porc)
 
 def theend():
-  volume = 1
-  loops = 0
+  from playsound import playsound
+
+# for playing note.wav file
+  playsound('/Death.mp3')
   print("THE END")
   print( "Thank you for playing")
   shows()
