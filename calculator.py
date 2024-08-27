@@ -3,7 +3,26 @@ def isNumber(num):
     if num == '' or num == '-':
         return False
     return num.isdigit() or num[0] == '-' and num[1:].isdigit()
-  
+
+def findB(exp):
+    stack = []
+    for i,c in enumerate(exp):
+        if c == '(':
+            stack.append(i)
+        elif c == ')':
+            if len(stack) == 1:
+                return stack.pop(), i
+            stack.pop()
+    return -1, -1
+
+def brackets(exp):
+    while findB(exp) != (-1, -1):
+        firstB, lastB = findB(exp)
+        if firstB != -1:
+            exp[firstB] = eval(exp[firstB+1:lastB])
+            del exp[firstB+1:lastB+1]
+    return exp
+
 def simplify(exp):
     i = 0
     while i < len(exp):
@@ -48,6 +67,8 @@ def AoS(exp):
     return exp
 
 def eval(exp):
+    exp = brackets(exp)
+    exp = simplify(exp)
     exp = MoD(exp)
     exp = AoS(exp)
     return exp[0]
