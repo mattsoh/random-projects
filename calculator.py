@@ -1,4 +1,3 @@
-#helper.py
 def isNumber(num):
     if num == '' or num == '-':
         return False
@@ -67,8 +66,4 @@ def AoS(exp):
     return exp
 
 def eval(exp):
-    exp = brackets(exp)
-    exp = simplify(exp)
-    exp = MoD(exp)
-    exp = AoS(exp)
-    return exp[0]
+    return AoS(MoD(simplify(brackets(re.findall(r'-?\d*\.?\d+|\S', exp)))))[0]
